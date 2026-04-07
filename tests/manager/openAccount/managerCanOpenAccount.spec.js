@@ -3,6 +3,7 @@ import { faker } from '@faker-js/faker';
 import { AddCustomerPage } from '../../../src/pages/manager/AddCustomerPage';
 import { OpenAccountPage } from '../../../src/pages/manager/OpenAccountPage';
 import { CustomersListPage } from '../../../src/pages/manager/CustomersListPage';
+import { BankManagerMainPage } from '../../../src/pages/manager/BankManagerMainPage';
 
 
 let firstName; 
@@ -10,14 +11,17 @@ let lastName;
 let postCode;
 let openAccountPage;
 let addCustomerPage;
-let customerListPage
+let customerListPage;
+let bankManagerMainPage;
+
 
 test.beforeEach(async ({ page }) => {
 
   addCustomerPage = new  AddCustomerPage(page);
   openAccountPage = new OpenAccountPage(page);
   customerListPage = new CustomersListPage(page);
-   
+  bankManagerMainPage = new BankManagerMainPage(page);
+
       firstName = faker.person.firstName();
       lastName = faker.person.lastName();
       postCode = faker.location.zipCode();
@@ -46,7 +50,7 @@ test('Assert manager can  open account', async ({ page }) => {
   await openAccountPage.selectCurrency('Dollar'); // крок 3
   await openAccountPage.clickProcessButton(); // крок 4
   await page.reload(); // крок 5
-  await customerListPage.clickCustomersButton();
+  await bankManagerMainPage.clickCustomersButton();
   await customerListPage.assertLastRowHasAccountNumber();
 
   /* 

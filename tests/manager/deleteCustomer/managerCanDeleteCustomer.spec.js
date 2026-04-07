@@ -2,16 +2,20 @@ import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { AddCustomerPage } from '../../../src/pages/manager/AddCustomerPage';
 import { CustomersListPage } from '../../../src/pages/manager/CustomersListPage';
+import { BankManagerMainPage } from '../../../src/pages/manager/BankManagerMainPage';
 
 let firstName; 
 let lastName;
 let postCode;
 let customerListPage;
 let addCustomerPage;
+let bankManagerMainPage;
+
 
 test.beforeEach(async ({ page }) => {
   addCustomerPage = new  AddCustomerPage(page);
   customerListPage = new CustomersListPage(page);
+  bankManagerMainPage = new BankManagerMainPage(page);
  
     firstName = faker.person.firstName();
     lastName = faker.person.lastName();
@@ -34,7 +38,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('Assert manager can delete customer', async ({ page }) => {
-  await customerListPage.clickCustomersButton();
+  await bankManagerMainPage.clickCustomersButton();
   await customerListPage.clickDeleteForCustomer(firstName);
   await customerListPage.assertCustomerNotInTable(firstName);
 

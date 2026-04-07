@@ -1,21 +1,21 @@
 import { test } from '@playwright/test';
 import { faker } from '@faker-js/faker';
 import { AddCustomerPage } from '../../../src/pages/manager/AddCustomerPage';
-import { OpenAccountPage } from '../../../src/pages/manager/OpenAccountPage';
 import { CustomersListPage } from '../../../src/pages/manager/CustomersListPage';
+import { BankManagerMainPage } from '../../../src/pages/manager/BankManagerMainPage';
 
 let firstName;
 let lastName;
 let postCode;
-let openAccountPage;
 let addCustomerPage;
-let customerListPage
+let customerListPage;
+let bankManagerMainPage;
 
 test.beforeEach(async ({ page }) => {
 
    addCustomerPage = new  AddCustomerPage(page);
-   openAccountPage = new OpenAccountPage(page);
    customerListPage = new CustomersListPage(page);
+   bankManagerMainPage = new BankManagerMainPage(page);
   /* 
   Pre-conditons:
   1. Open Add Customer page.
@@ -37,7 +37,7 @@ test.beforeEach(async ({ page }) => {
 
 test('Assert manager can search customer by First Name', async ({ page }) => {
 
-  await customerListPage.clickCustomersButton();
+  await bankManagerMainPage.clickCustomersButton();
   await customerListPage.fillSearchInput(firstName);
   await customerListPage.assertTableContainsCustomer(firstName);
   await customerListPage.assertTableHasOnlyOneRow();
