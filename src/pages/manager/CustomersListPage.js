@@ -1,4 +1,3 @@
-/*import { th } from '@faker-js/faker';*/
 import { expect } from '@playwright/test';
 
 export class CustomersListPage {
@@ -6,7 +5,6 @@ export class CustomersListPage {
     this.page = page;
     this.customersButton = page.getByRole('button', { name: 'Customers' });
     this.lastRow = page.locator('tbody tr').last();
-    this.deleteButton = this.lastRow.getByRole('button', { name: 'Delete'});
     this.searchInput = page.getByPlaceholder('Search Customer');
 
   }
@@ -50,5 +48,9 @@ async assertTableContainsCustomer(name) {
 
 async assertTableHasOnlyOneRow() {
   await expect(this.page.locator('tbody tr')).toHaveCount(1);
+}
+async clickDeleteForCustomer(firstName) {
+  const row = this.page.locator('tbody tr').filter({ hasText: firstName });
+  await row.getByRole('button', { name: 'Delete' }).click();
 }
 }

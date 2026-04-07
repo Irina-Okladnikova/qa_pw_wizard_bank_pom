@@ -40,7 +40,7 @@ test.beforeEach(async ({ page }) => {
   */
 });
 
-test('Assert manager can add new customer', async ({ page }) => {
+test('Assert manager can  open account', async ({ page }) => {
   await openAccountPage.open(); // відкриваємо сторінку
   await openAccountPage.selectCustomer(`${firstName} ${lastName}`); // крок 2
   await openAccountPage.selectCurrency('Dollar'); // крок 3

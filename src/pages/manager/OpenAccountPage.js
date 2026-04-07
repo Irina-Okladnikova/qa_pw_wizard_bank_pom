@@ -3,7 +3,6 @@ import { expect } from '@playwright/test';
 export class OpenAccountPage {
   constructor(page) {
     this.page = page;
-    this.openAccountButton = page.getByRole('button', { name: 'Open Account'});
     this.customerDropDown = page.locator('#userSelect');
     this.currencyDropDown = page.locator('#currency');
     this.processButton = page.getByRole('button', { name: 'Process' });
@@ -28,14 +27,11 @@ export class OpenAccountPage {
 async selectCurrency(currency) {
   await this.currencyDropDown.selectOption(currency);
 }
- async clickOpenAccountButton() {
-  await this.openAccountButton.click();
- }  
+
  async selectCustomer(fullName) {
   await this.customerDropDown.selectOption({ label: fullName });
 }
 async clickProcessButton() {
   await this.processButton.click();
 }
-
 }

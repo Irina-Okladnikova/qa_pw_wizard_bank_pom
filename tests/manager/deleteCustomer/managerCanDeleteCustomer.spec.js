@@ -35,7 +35,7 @@ test.beforeEach(async ({ page }) => {
 
 test('Assert manager can delete customer', async ({ page }) => {
   await customerListPage.clickCustomersButton();
-  await customerListPage.clickDeleteForLastRow();
+  await customerListPage.clickDeleteForCustomer(firstName);
   await customerListPage.assertCustomerNotInTable(firstName);
 
   await page.reload();
